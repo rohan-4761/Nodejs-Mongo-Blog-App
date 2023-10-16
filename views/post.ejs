@@ -1,0 +1,33 @@
+<script>
+  function isCookieSet(cookieName) {
+    // Split the document.cookie string into an array of individual cookies
+    const cookiesArray = document.cookie.split(";");
+
+    // Loop through the cookies to check if the desired cookie is present
+    for (let i = 0; i < cookiesArray.length; i++) {
+      const cookie = cookiesArray[i].trim(); // Remove leading/trailing whitespace
+
+      // Check if the cookie name matches the desired cookie
+      if (cookie.startsWith(cookieName + "=")) {
+        return true;
+      }
+    }
+
+    // The desired cookie was not found
+    return false;
+  }
+
+  // Example usage:
+  const linkContainer = document.getElementById("link-container"); // Replace with the ID of your container element
+
+  if (isCookieSet("token")) {
+    // Cookie is present, display the link for true
+    linkContainer.innerHTML = '<a href="/dashboard">&larr; Dashboard</a>';
+  } else {
+    // Cookie is not present, display the link for false
+    linkContainer.innerHTML = '<a href="/">&larr; Home</a>';
+  }
+</script>
+<div id="link-container"></div>
+<h1><%= data.title %></h1>
+<article class="article"><%= data.body %></article>
